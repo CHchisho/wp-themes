@@ -57,6 +57,38 @@
 			<p class="text-muted mb-0"><?php echo esc_html__('No services yet.', 'example-theme'); ?></p>
 		<?php endif; ?>
 	</section>
+
+	<section class="products mt-4">
+		<h2 class="h4 w-100 mb-3"><?php echo esc_html__('Featured services', 'example-theme'); ?></h2>
+
+		<?php
+		$featured = new WP_Query(
+			array(
+				'post_type'      => 'service',
+				'posts_per_page' => 3,
+				'tag'            => 'featured',
+			)
+		);
+
+		generate_article($featured);
+		?>
+	</section>
+
+	<section class="products mt-4">
+		<h2 class="h4 w-100 mb-3"><?php echo esc_html__('Latest products', 'example-theme'); ?></h2>
+
+		<?php
+		$latest_products = new WP_Query(
+			array(
+				'post_type'      => 'post',
+				'category_name'  => 'products',
+				'posts_per_page' => 2,
+			)
+		);
+
+		generate_article($latest_products);
+		?>
+	</section>
 </main>
 
 <?php get_footer(); ?>

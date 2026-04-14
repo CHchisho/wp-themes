@@ -32,3 +32,9 @@
                 </nav>
             </div>
         </header>
+
+		<?php if (function_exists('bcn_display')) : ?>
+			<nav class="breadcrumbs w-100 mb-3" aria-label="<?php echo esc_attr__('Breadcrumbs', 'example-theme'); ?>">
+				<?php bcn_display(); ?>
+			</nav>
+		<?php endif; ?>

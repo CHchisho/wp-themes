@@ -5,6 +5,7 @@ function example_theme_setup()
 	add_theme_support('title-tag');
 	add_theme_support('post-thumbnails');
 	add_theme_support('custom-header');
+	add_theme_support('html5', array('search-form'));
 
 	add_theme_support(
 		'custom-logo',
@@ -28,6 +29,26 @@ function example_theme_setup()
 }
 add_action('after_setup_theme', 'example_theme_setup');
 
+function search_filter($query)
+{
+	if (! is_admin() && $query->is_main_query() && $query->is_search) {
+		$query->set('category_name', 'products');
+	}
+
+	return $query;
+}
+add_filter('pre_get_posts', 'search_filter');
+
+function my_breadcrumb_title_swapper($title, $type, $id)
+{
+	if (in_array('home', $type, true)) {
+		$title = __('Home', 'example-theme');
+	}
+
+	return $title;
+}
+add_filter('bcn_breadcrumb_title', 'my_breadcrumb_title_swapper', 3, 10);
+
 function example_theme_register_post_types()
 {
 	register_post_type(
@@ -44,6 +65,7 @@ function example_theme_register_post_types()
 			'menu_icon'    => 'dashicons-hammer',
 			'show_in_rest' => true,
 			'rewrite'      => array('slug' => 'services'),
+			'taxonomies'   => array('category', 'post_tag'),
 			'supports'     => array('title', 'editor', 'thumbnail', 'excerpt'),
 		)
 	);
@@ -162,3 +184,6 @@ function example_theme_ajax_submit_contact()
 
 add_action('wp_ajax_example_theme_submit_contact', 'example_theme_ajax_submit_contact');
 add_action('wp_ajax_nopriv_example_theme_submit_contact', 'example_theme_ajax_submit_contact');
+
+require_once(__DIR__ . '/inc/article-function.php');
+require_once(__DIR__ . '/inc/random-image.php');
