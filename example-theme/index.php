@@ -19,8 +19,6 @@
     <?php endif; ?>
 </section>
 
-</header>
-
 <main>
     <section class="products">
         <h2>Featured Products</h2>

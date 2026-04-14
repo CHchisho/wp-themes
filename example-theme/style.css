@@ -35,7 +35,9 @@ aside {
   display: flex;
   align-items: center;
   text-align: center;
-  box-shadow: inset 0 0 5px #9f9f9f, 0 0 5px #9f9f9f;
+  box-shadow:
+    inset 0 0 5px #9f9f9f,
+    0 0 5px #9f9f9f;
   border-radius: 6px;
 }
 
@@ -69,6 +71,7 @@ footer {
 .page-header {
   display: flex;
   flex-wrap: wrap;
+  width: 100%;
   margin-bottom: 1rem;
   justify-content: space-between;
   background-image: url('wave.svg');
@@ -102,23 +105,22 @@ footer {
 }
 
 .hero {
-  position: relative;
   width: 100%;
-  height: 20rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .hero-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #f4f4f4;
+  position: static;
+  transform: none;
+  color: #333;
   text-align: center;
 }
 
 .hero img {
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: cover;
 }
 
